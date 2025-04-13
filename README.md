@@ -36,10 +36,12 @@ Após importação da configuração do pipeline no Data Fusion, clicar no botã
 
 ![](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/datafusion-run-pipeline.png)
 
+Neste momento, o Data Fusion irá realizar a leitura dos arquivos .CSV, limpeza dos dados, provisionar um cluster Hadoop temporário através do serviço Dataproc para execução das transformações necessárias, e por fim, escrever o resultado num dataset no BigQuery.
+
 ## Visualização
 
-Para a visualização dos dados, o Looker Studio permite a criaçao de reports de acordo com diferentes critérios de consulta.
+Para a visualização dos dados, o Looker Studio permite a criaçao de reports de acordo com diferentes critérios de consulta que podem ser criados no BigQuery.
 
-Segue abaixo link para exemplo de report:
+Segue link com exemplo de report:
 https://lookerstudio.google.com/reporting/e53372f4-8772-4ca4-83c5-4fce6143634e 
 
