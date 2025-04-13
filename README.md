@@ -25,7 +25,7 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 
 ## Configuração
 
-1.  **Criação do bucket e importação dos dados brutos:** após criar o bucket, importe os arquivos .CSV baixados diretamente do Portal da Transparência ou se preferir, na pasta 
+1.  **Criação do bucket e importação dos dados brutos:** após criar o bucket, importe os arquivos .CSV baixados diretamente do Portal da Transparência ou se preferir, a partir da pasta [dados_brutos](https://github.com/JoseAugustoLima/pipeline-cpgf/tree/main/dados_brutos).
 2.  **Importar o pipeline do DataFusion:** Importe o pipeline do DataFusion a partir do arquivo [nome do arquivo].
 3.  **Configurar os parâmetros do pipeline:** Defina os parâmetros do pipeline, como os caminhos para os buckets do Cloud Storage, os nomes das tabelas do BigQuery, etc.
 4.  **Executar o pipeline:** Execute o pipeline do DataFusion para processar os dados.
