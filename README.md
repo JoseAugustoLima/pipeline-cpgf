@@ -1,6 +1,6 @@
 # Pipeline de Dados para Análise dos Gastos do Cartão de Pagamento do Governo Federal (CPGF)
 
-Este projeto cria uma pipeline de dados para obtenção de dados públicos sobre os gastos do cartão de pagamento do governo federal do Brasil, incluindo transformação, limpeza e apresentação dos dados referente ao ano de 2024.
+Este projeto cria uma pipeline de dados para análise de dados públicos sobre os gastos do cartão de pagamento do governo federal do Brasil, incluindo transformação, limpeza e apresentação dos dados referente ao ano de 2024.
 
 ## Visão Geral
 
