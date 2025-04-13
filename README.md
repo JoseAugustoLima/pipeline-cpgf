@@ -17,7 +17,7 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 ## Pré-Requisitos
 
 1.  **Uma conta no Google Cloud:** todo o processo pode ser realizado através de uma nova conta no GCP (gratuita com créditos de US$300).
-2.  **Um projeto no Google Cloud:** no caso de ainda ter criado um anteriormente.
+2.  **Um projeto no Google Cloud:** no caso de ainda não existir um.
 3.  **Habilitar as APIs necessárias:** certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
 4.  **Habilitar o Billing:** ainda que com uso de créditos, se faz necessário associar o projeto a um billing account.
 5.  **Criar uma instância do DataFusion:** use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
