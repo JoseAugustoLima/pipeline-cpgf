@@ -9,9 +9,9 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 ## Principais Componentes
 
 *   **Cloud Storage:** usado para armazenar os dados brutos no formato .CSV 
-*   **Google Cloud DataFusion:** serviço principal para criação e deploy do pipeline
-*   **Google Dataproc:** serviço gerenciado para execução do Apache Hadoop
-*   **BigQuery:** usado análise e armazenamento de dados transformados
+*   **Cloud Data Fusion:** serviço principal para criação e deploy do pipeline
+*   **Dataproc:** serviço gerenciado para execução do Apache Hadoop
+*   **BigQuery:** usado para análise e armazenamento de dados transformados
 *   **Looker Studio:** usado para visualização e apresentação dos dados.
 
 ## Pré-Requisitos
@@ -28,18 +28,16 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 1.  **Criação do bucket e importação dos dados brutos:** após criar o bucket, importe os arquivos .CSV baixados diretamente do Portal da Transparência ou se preferir, a partir da pasta [dados_brutos](https://github.com/JoseAugustoLima/pipeline-cpgf/tree/main/dados_brutos).
 2.  **Importar o pipeline do DataFusion:** Importe o pipeline pré-configurado do DataFusion a partir do arquivo [pipeline-cpgf-cdap.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/pipeline-cpgf-cdap.json).
 ### Atenção
-Atualizar o parâmetros "path" com o caminho do bucket de origem dos dados
+Atualizar o parâmetros "path" com o caminho do bucket de origem dos dados.
 
 ## Execução
 
-3.  **Configurar os parâmetros do pipeline:** Defina os parâmetros do pipeline, como os caminhos para o buckets do Cloud Storage, os nomes das tabelas do BigQuery, etc.
-4.   **Executar o pipeline:** Execute o pipeline do DataFusion para processar os dados.
+Após importação da configuração do pipeline no Data Fusion, clicar no botão "Run".
 
-## Monitoramento
+![](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/datafusion-run-pipeline.png)
 
-[Descreva como monitorar a execução do seu projeto. Isso pode envolver:]
+## Visualização
 
-*   **Painéis do DataFusion:** Use os painéis do DataFusion para monitorar o desempenho do pipeline.
-*   **Cloud Logging:** Use o Cloud Logging para visualizar os logs do DataFusion.
-*   **Cloud Monitoring:** Use o Cloud Monitoring para criar alertas e painéis personalizados.
+Para a visualização dos dados, o Looker Studio permite a criaçao de reports de acordo com diferentes critérios de consulta. Segue abaixo link para exemplo de report:
+https://lookerstudio.google.com/reporting/e53372f4-8772-4ca4-83c5-4fce6143634e 
 
