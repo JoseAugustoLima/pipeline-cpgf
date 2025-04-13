@@ -1,34 +1,25 @@
-# Projeto DataFusion no Google Cloud
+# Pipeline de Dados para Análise dos Gastos do Cartão de Pagamento do Governo Federal (CPGF)
 
-Este projeto demonstra o uso do Google Cloud DataFusion para [descreva brevemente o objetivo do seu projeto, por exemplo: "integração de dados de diferentes fontes", "pipeline de ETL para análise de vendas", etc.].
+Este projeto cria uma pipeline de dados para obtenção de dados públicos sobre os gastos do cartão de pagamento do governo federal do Brasil, incluindo transformação, limpeza e apresentação dos dados referente ao ano de 2024.
 
 ## Visão Geral
 
-O DataFusion é um serviço de integração de dados totalmente gerenciado na nuvem do Google. Este projeto usa o DataFusion para [descreva o que o DataFusion faz especificamente neste projeto, por exemplo: "extrair dados de um bucket do Cloud Storage", "transformar dados usando um pipeline personalizado", "carregar dados para o BigQuery"].
+Os dados brutos foram obtidos através do Portal da Transparência da Controladoria Geral da União (https://portaldatransparencia.gov.br/download-de-dados/cpgf) e todo o processo de ETL (Extração, Transformação, Carregamento) e visualização foi realizado utilizando a stack de soluções do Google Cloud.
 
-## Arquitetura
+## Principais Componentes
 
-[Aqui, adicione um diagrama ou uma descrição textual da arquitetura do seu projeto. Inclua os componentes principais, como:]
-
-*   **Google Cloud DataFusion:** O serviço principal de integração de dados.
-*   **Cloud Storage:** Usado para [armazenar dados de entrada, saída, etc.].
-*   **BigQuery:** Usado para [armazenar dados processados, resultados de análise, etc.].
-*   **Outros serviços (opcional):** Se o seu projeto usa outros serviços do Google Cloud, liste-os aqui.
-
-## Pré-requisitos
-
-Antes de começar, você precisará:
-
-*   Uma conta do Google Cloud com acesso ao DataFusion e outros serviços relevantes.
-*   A ferramenta de linha de comando `gcloud` instalada e configurada.
-*   [Liste outras dependências, como bibliotecas Python, etc.]
+*   **Cloud Storage:** usado para armazenar os dados brutos no formato .CSV 
+*   **Google Cloud DataFusion:** serviço principal para criação e deploy do pipeline
+*   **Google Dataproc:** serviço gerenciado para execução do Apache Hadoop
+*   **BigQuery:** usado análise e armazenamento de dados transformados
+*   **Looker Studio:** usado para visualização e apresentação dos dados.
 
 ## Configuração
 
-1.  **Crie um projeto no Google Cloud:** [Se você ainda não tiver um projeto, crie um.]
-2.  **Habilite as APIs necessárias:** Certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
-3.  **Crie uma instância do DataFusion:** Use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
-4.  **Configure as credenciais:** Configure as credenciais para que o DataFusion possa acessar outros serviços do Google Cloud.
+2.  **Crie um projeto no Google Cloud:** [Se você ainda não tiver um projeto, crie um.]
+3.  **Habilite as APIs necessárias:** Certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
+4.  **Crie uma instância do DataFusion:** Use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
+5.  **Configure as credenciais:** Configure as credenciais para que o DataFusion possa acessar outros serviços do Google Cloud.
 
 ## Implantação
 
@@ -50,13 +41,3 @@ Antes de começar, você precisará:
 *   **Cloud Logging:** Use o Cloud Logging para visualizar os logs do DataFusion.
 *   **Cloud Monitoring:** Use o Cloud Monitoring para criar alertas e painéis personalizados.
 
-## Contribuição
-
-[Explique como outros podem contribuir para o seu projeto. Isso pode envolver:]
-
-*   **Relatar bugs:** Relate bugs e problemas no sistema de rastreamento de problemas do GitHub.
-*   **Enviar solicitações de pull:** Envie solicitações de pull com correções de bugs, novos recursos, etc.
-
-## Licença
-
-[Especifique a licença sob a qual seu projeto é distribuído.]
