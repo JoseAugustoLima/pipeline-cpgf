@@ -18,15 +18,15 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 
 1.  **Uma conta no Google Cloud:** todo o processo pode ser realizado através de uma nova conta no GCP (gratuita com créditos de US$300).
 2.  **Um projeto no Google Cloud:** no caso de ainda não existir um.
-3.  **Habilitar as APIs necessárias:** certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
+3.  **Habilitar as APIs necessárias:** certifique-se de que as APIs do Data Fusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
 4.  **Habilitar o Billing:** ainda que com uso de créditos, se faz necessário associar o projeto a um billing account.
 5.  **Criar uma instância do DataFusion:** use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
-6.  **Configurar as credenciais:** configure as credenciais para que o DataFusion possa acessar outros serviços do Google Cloud como Cloud Storage, Dataproc e BigQuery.
+6.  **Configurar as credenciais:** configure as credenciais para que o Data Fusion possa acessar outros serviços do Google Cloud como Cloud Storage, Dataproc e BigQuery.
 
 ## Configuração
 
 1.  **Criação do bucket e importação dos dados brutos:** após criar o bucket, importe os arquivos .CSV baixados diretamente do Portal da Transparência ou se preferir, a partir da pasta [dados_brutos](https://github.com/JoseAugustoLima/pipeline-cpgf/tree/main/dados_brutos).
-2.  **Importar o pipeline do DataFusion:** Importe o pipeline pré-configurado do DataFusion a partir do arquivo [pipeline-cpgf-cdap.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/pipeline-cpgf-cdap.json).
+2.  **Importar o pipeline do Data Fusion:** Importe o pipeline pré-configurado do DataFusion a partir do arquivo [pipeline-cpgf-cdap.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/pipeline-cpgf-cdap.json).
 ### Atenção
 Atualizar o parâmetros "path" com o caminho do bucket de origem dos dados.
 
