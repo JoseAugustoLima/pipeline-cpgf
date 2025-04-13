@@ -38,6 +38,8 @@ Após importação da configuração do pipeline no Data Fusion, clicar no botã
 
 ## Visualização
 
-Para a visualização dos dados, o Looker Studio permite a criaçao de reports de acordo com diferentes critérios de consulta. Segue abaixo link para exemplo de report:
+Para a visualização dos dados, o Looker Studio permite a criaçao de reports de acordo com diferentes critérios de consulta.
+
+Segue abaixo link para exemplo de report:
 https://lookerstudio.google.com/reporting/e53372f4-8772-4ca4-83c5-4fce6143634e 
 
