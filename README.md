@@ -4,7 +4,7 @@ Este projeto cria uma pipeline de dados para obtenção de dados públicos sobre
 
 ## Visão Geral
 
-Os dados brutos foram obtidos através do Portal da Transparência da Controladoria Geral da União (https://portaldatransparencia.gov.br/download-de-dados/cpgf) e todo o processo de ETL (Extração, Transformação, Carregamento) e visualização foi realizado utilizando a stack de soluções do Google Cloud.
+Os dados brutos foram obtidos através do Portal da Transparência da Controladoria Geral da União (https://portaldatransparencia.gov.br/download-de-dados/cpgf) e todo o processo de ETL (Extração, Transformação, Carregamento) e visualização é realizado utilizando a stack de soluções do Google Cloud, através de um processo em lote (batch).
 
 ## Principais Componentes
 
@@ -14,20 +14,21 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 *   **BigQuery:** usado análise e armazenamento de dados transformados
 *   **Looker Studio:** usado para visualização e apresentação dos dados.
 
+## Pré-Requisitos
+
+1.  **Uma conta no Google Cloud:** todo o processo pode ser realizado através de uma nova conta no GCP (gratuita com créditos de US$300).
+2.  **Crie um projeto no Google Cloud:** no caso de ainda ter criado um anteriormente.
+3.  **Habilite as APIs necessárias:** Certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
+4.  **Habilite o Billing:** Ainda que com uso de créditos, se faz necessário associar o projeto a um billing account.
+5.  **Crie uma instância do DataFusion:** Use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
+6.  **Configure as credenciais:** Configure as credenciais para que o DataFusion possa acessar outros serviços do Google Cloud.
+
 ## Configuração
 
-2.  **Crie um projeto no Google Cloud:** [Se você ainda não tiver um projeto, crie um.]
-3.  **Habilite as APIs necessárias:** Certifique-se de que as APIs do DataFusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
-4.  **Crie uma instância do DataFusion:** Use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
-5.  **Configure as credenciais:** Configure as credenciais para que o DataFusion possa acessar outros serviços do Google Cloud.
-
-## Implantação
-
-[Descreva como implantar e executar seu projeto. Isso pode envolver:]
-
-1.  **Importar o pipeline do DataFusion:** Importe o pipeline do DataFusion a partir do arquivo [nome do arquivo].
-2.  **Configurar os parâmetros do pipeline:** Defina os parâmetros do pipeline, como os caminhos para os buckets do Cloud Storage, os nomes das tabelas do BigQuery, etc.
-3.  **Executar o pipeline:** Execute o pipeline do DataFusion para processar os dados.
+1.  **Criação do bucket e importação dos dados brutos:** após criar o bucket, importe os arquivos .CSV baixados diretamente do Portal da Transparência ou se preferir, na pasta 
+2.  **Importar o pipeline do DataFusion:** Importe o pipeline do DataFusion a partir do arquivo [nome do arquivo].
+3.  **Configurar os parâmetros do pipeline:** Defina os parâmetros do pipeline, como os caminhos para os buckets do Cloud Storage, os nomes das tabelas do BigQuery, etc.
+4.  **Executar o pipeline:** Execute o pipeline do DataFusion para processar os dados.
 
 ## Uso
 
