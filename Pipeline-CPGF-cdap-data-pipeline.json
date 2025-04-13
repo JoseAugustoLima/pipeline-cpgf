@@ -1,0 +1,152 @@
+{
+    "name": "Pipeline-CPGF",
+    "description": "ETL pipeline to parse CSV, transform and write output to BigQuery",
+    "artifact": {
+        "name": "cdap-data-pipeline",
+        "version": "6.10.1",
+        "scope": "SYSTEM"
+    },
+    "config": {
+        "schedule": "0 1 */1 * *",
+        "maxConcurrentRuns": 1,
+        "postActions": [],
+        "description": "ETL pipeline to parse CSV, transform and write output to BigQuery",
+        "stages": [
+            {
+                "name": "Cloud Storage",
+                "plugin": {
+                    "name": "GCSFile",
+                    "type": "batchsource",
+                    "properties": {
+                        "copyHeader": "true",
+                        "path": "gs://datafusion-teste/*.csv",
+                        "fileEncoding": "UTF-8",
+                        "useConnection": "true",
+                        "format": "text",
+                        "connection": "${conn(Cloud Storage Default)}",
+                        "referenceName": "datafusion-teste.CPGF.csv",
+                        "schema": "{\"type\":\"record\",\"name\":\"text\",\"fields\":[{\"name\":\"body\",\"type\":\"string\"}]}",
+                        "sampleSize": "1000",
+                        "filenameOnly": "false",
+                        "recursive": "false",
+                        "ignoreNonExistingFolders": "false",
+                        "encrypted": "false"
+                    },
+                    "artifact": {
+                        "scope": "SYSTEM",
+                        "name": "google-cloud",
+                        "version": "0.23.1"
+                    },
+                    "label": "Cloud Storage"
+                },
+                "outputSchema": [
+                    {
+                        "name": "etlSchemaBody",
+                        "schema": "{\"type\":\"record\",\"name\":\"text\",\"fields\":[{\"name\":\"body\",\"type\":\"string\"}]}"
+                    }
+                ],
+                "id": "Cloud-Storage"
+            },
+            {
+                "name": "Wrangler",
+                "plugin": {
+                    "name": "Wrangler",
+                    "type": "transform",
+                    "properties": {
+                        "directives": "find-and-replace :body s/Ó/O/g\nfind-and-replace :body s/Ã/A/g\nfind-and-replace :body s/Ê/E/g\nfind-and-replace :body s/Ç/C/g\nparse-as-csv :body ',' true\ndrop :body\nfind-and-replace :VALOR_TRANSACAO s/,/./g",
+                        "field": "*",
+                        "precondition": "false",
+                        "workspaceId": "5188c792-3f64-4701-b0b4-f201e6a2aa75",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"CODIGO_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"ANO_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"MES_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CPF_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CNPJ_OU_CPF_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"DATA_TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"VALOR_TRANSACAO\",\"type\":[\"string\",\"null\"]}]}",
+                        "expressionLanguage": "jexl",
+                        "on-error": "fail-pipeline"
+                    },
+                    "artifact": {
+                        "scope": "SYSTEM",
+                        "name": "wrangler-transform",
+                        "version": "4.10.1"
+                    },
+                    "label": "Wrangler"
+                },
+                "inputSchema": [
+                    {
+                        "name": "Cloud Storage",
+                        "schema": "{\"type\":\"record\",\"name\":\"text\",\"fields\":[{\"name\":\"body\",\"type\":\"string\"}]}"
+                    }
+                ],
+                "outputSchema": [
+                    {
+                        "name": "etlSchemaBody",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"CODIGO_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"ANO_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"MES_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CPF_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CNPJ_OU_CPF_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"DATA_TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"VALOR_TRANSACAO\",\"type\":[\"string\",\"null\"]}]}"
+                    }
+                ],
+                "id": "Wrangler"
+            },
+            {
+                "name": "BigQuery",
+                "plugin": {
+                    "name": "BigQueryTable",
+                    "type": "batchsink",
+                    "properties": {
+                        "useConnection": "false",
+                        "project": "auto-detect",
+                        "serviceAccountType": "filePath",
+                        "serviceFilePath": "auto-detect",
+                        "dataset": "cpgf_dataset",
+                        "table": "transactions_raw",
+                        "operation": "insert",
+                        "truncateTable": "false",
+                        "allowSchemaRelaxation": "false",
+                        "location": "US",
+                        "createPartitionedTable": "false",
+                        "partitioningType": "TIME",
+                        "timePartitioningType": "DAY",
+                        "partitionFilterRequired": "false",
+                        "schema": "{\"name\":\"etlSchemaBody\",\"type\":\"record\",\"fields\":[{\"name\":\"CODIGO_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"ANO_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"MES_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CPF_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CNPJ_OU_CPF_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"DATA_TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"VALOR_TRANSACAO\",\"type\":[\"string\",\"null\"]}]}"
+                    },
+                    "artifact": {
+                        "scope": "SYSTEM",
+                        "name": "google-cloud",
+                        "version": "0.23.1"
+                    },
+                    "label": "BigQuery"
+                },
+                "inputSchema": [
+                    {
+                        "name": "Wrangler",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"CODIGO_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"ANO_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"MES_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CPF_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CNPJ_OU_CPF_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"DATA_TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"VALOR_TRANSACAO\",\"type\":[{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":38,\"scale\":2},\"null\"]}]}"
+                    }
+                ],
+                "outputSchema": [
+                    {
+                        "name": "etlSchemaBody",
+                        "schema": "{\"name\":\"etlSchemaBody\",\"type\":\"record\",\"fields\":[{\"name\":\"CODIGO_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO_SUPERIOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_ORGAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CODIGO_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_UNIDADE_GESTORA\",\"type\":[\"string\",\"null\"]},{\"name\":\"ANO_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"MES_EXTRATO\",\"type\":[\"string\",\"null\"]},{\"name\":\"CPF_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_PORTADOR\",\"type\":[\"string\",\"null\"]},{\"name\":\"CNPJ_OU_CPF_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"NOME_FAVORECIDO\",\"type\":[\"string\",\"null\"]},{\"name\":\"TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"DATA_TRANSACAO\",\"type\":[\"string\",\"null\"]},{\"name\":\"VALOR_TRANSACAO\",\"type\":[\"string\",\"null\"]}]}"
+                    }
+                ],
+                "id": "BigQuery"
+            }
+        ],
+        "connections": [
+            {
+                "from": "Cloud Storage",
+                "to": "Wrangler"
+            },
+            {
+                "from": "Wrangler",
+                "to": "BigQuery"
+            }
+        ],
+        "resources": {
+            "virtualCores": 1,
+            "memoryMB": 2048
+        },
+        "driverResources": {
+            "virtualCores": 1,
+            "memoryMB": 2048
+        },
+        "stageLoggingEnabled": true,
+        "processTimingEnabled": true,
+        "numOfRecordsPreview": 100,
+        "properties": {}
+    }
+}
