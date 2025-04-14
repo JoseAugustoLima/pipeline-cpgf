@@ -20,7 +20,7 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 2.  **Um projeto no Google Cloud:** no caso de ainda não existir um.
 3.  **Habilitar as APIs necessárias:** certifique-se de que as APIs do Data Fusion, Cloud Storage e BigQuery estejam habilitadas no seu projeto.
 4.  **Habilitar o Billing:** ainda que com uso de créditos, se faz necessário associar o projeto a um billing account.
-5.  **Criar uma instância do DataFusion:** use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
+5.  **Criar uma instância do Data Fusion:** use o console do Google Cloud ou a ferramenta `gcloud` para criar uma instância do DataFusion.
 6.  **Configurar as credenciais:** configure as credenciais para que o Data Fusion possa acessar outros serviços do Google Cloud como Cloud Storage, Dataproc e BigQuery.
 
 ## Configuração
