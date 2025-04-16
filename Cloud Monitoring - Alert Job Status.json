@@ -1,0 +1,37 @@
+{
+  "name": "projects/datafusion-456001/alertPolicies/7500939246176065858",
+  "displayName": "DataProc Job - Final Status",
+  "documentation": {},
+  "userLabels": {},
+  "conditions": [
+    {
+      "name": "projects/datafusion-456001/alertPolicies/7500939246176065858/conditions/7500939246176065907",
+      "displayName": "Log match condition",
+      "conditionMatchedLog": {
+        "filter": "resource.type=\"cloud_dataproc_cluster\"\njsonPayload.message=\"Pipeline 'Pipeline-CPGF' failed.\" OR jsonPayload.message=\"Pipeline 'Pipeline-CPGF' succeeded.\"\n"
+      }
+    }
+  ],
+  "alertStrategy": {
+    "notificationRateLimit": {
+      "period": "900s"
+    },
+    "autoClose": "604800s",
+    "notificationPrompts": [
+      "OPENED"
+    ]
+  },
+  "combiner": "OR",
+  "enabled": true,
+  "notificationChannels": [
+    "projects/datafusion-456001/notificationChannels/15867835433145544582"
+  ],
+  "creationRecord": {
+    "mutateTime": "2025-04-13T06:44:58.114379962Z",
+    "mutatedBy": "joseaugustomarcellino.lima@mackenzista.com.br"
+  },
+  "mutationRecord": {
+    "mutateTime": "2025-04-13T06:44:58.114379962Z",
+    "mutatedBy": "joseaugustomarcellino.lima@mackenzista.com.br"
+  }
+}
