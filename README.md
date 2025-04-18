@@ -30,7 +30,8 @@ Os dados brutos foram obtidos através do Portal da Transparência da Controlado
 2.  **Importação do pipeline do Data Fusion:** Importe o pipeline pré-configurado do DataFusion a partir do arquivo [pipeline-cpgf-cdap.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/pipeline-cpgf-cdap.json).
 ### Atenção
 Atualizar o parâmetros "path" com o caminho do bucket de origem dos dados.
-3.  **Importação do alerta de status:** Importe a configuração da geração de alertas a partir do arquivo [cloud-monitoring-job-status.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/pipeline-cpgf-cdap.json). 
+
+3.  **Importação do alerta de status:** Importe a configuração da geração de alertas a partir do arquivo [cloud-monitoring-job-status.json](https://github.com/JoseAugustoLima/pipeline-cpgf/blob/main/cloud-monitoring-job-status.json). 
 
 ## Execução
 
